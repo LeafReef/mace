@@ -1,19 +1,28 @@
 using System;
 using System.Threading.Tasks;
 using Discord.Commands;
+using mace.Modules;
 
 namespace SpeckBot.Modules
 {
     public class Commands : ModuleBase<SocketCommandContext>
     {
-        // MarketPrices price = new MarketPrices();
+        SensorData sensor = new SensorData();
 
-        [Command("leaf")]
-        public async Task Leaf()
+        [Command("temp")]
+        public async Task Temperature()
         {
-            //double bitcoinPrice = price.GetBitcoinPrice((currency));
+            string temperature = sensor.getTemperature();
 
-            await ReplyAsync("Hello team");
+            await ReplyAsync(temperature + "°C");
+        }
+
+        [Command("hum")]
+        public async Task Humidity()
+        {
+            string humidity = sensor.getHumidity();
+
+            await ReplyAsync(humidity + "%");
         }
     }
 }
